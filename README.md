@@ -1,14 +1,13 @@
 ## Installation
 
-To run the example (from this folder, **not the root**):
 
-1. `npm i`
-2. `npm run build`
+1. `yarn / npm i`
+2. `yarn build / npm run build `
 3. install the extension from `/dist` folder via _Load unpacked extension_ button in Chrome
 
 ## Tutorial
 
-So, let's assume that our WebExtension has popup with counter. Value of the counter can be changed by clicking on the buttons in popup.
+So, let's assume that our WebExtension has some todos. We can add new todo or delete with button in popup.
 
 #### Background page
 
@@ -20,8 +19,8 @@ const store = createStore(reducer); // real Redux store
 export default createBackgroundStore({
     store,
     actions: {
-        'someKeyForIncrement': incrementCounterBackground,
-        'someKeyForDecrement': decrementCounterBackground
+        'someKeyForAdd': addTask,
+        'someKeyForRemove': removeTask
     }
 });
 ```
@@ -31,13 +30,20 @@ As you can see we provide real Redux store to `createBackgroundStore` and also p
 Regarding _background_ actions, they're just usual actions as in any Redux application:
 
 ```js
-export function incrementCounterBackground() {
-    return {type: INCREMENT_COUNTER};
+export function addTask({ value }) {
+  return {
+    type: ADD_TASK,
+    value
+  };
 }
 
-export function decrementCounterBackground() {
-    return {type: DECREMENT_COUNTER};
+export function removeTask({ taskId }) {
+  return {
+    type: REMOVE_TASK,
+    taskId
+  };
 }
+
 ```
 
 And that's it about _background_ page, pretty straightforward.

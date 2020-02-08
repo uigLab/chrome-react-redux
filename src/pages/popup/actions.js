@@ -1,15 +1,17 @@
-import {INCREMENT_UI_COUNTER, DECREMENT_UI_COUNTER} from '../constants';
+import {ADD_TASK, REMOVE_TASK} from '../constants';
 
-export function incrementUICounter() {
+
+
+export function addTask(task) {
     return {
-        type: INCREMENT_UI_COUNTER,
-        value: 3
+      type: ADD_TASK,
+      value: task
     };
 }
 
-export function decrementUICounter() {
+export function removeTask(taskId) {
     return {
-        type: DECREMENT_UI_COUNTER,
-        value: 3
+      type: REMOVE_TASK,
+      taskId
     };
 }

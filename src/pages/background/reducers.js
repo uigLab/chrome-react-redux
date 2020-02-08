@@ -1,26 +1,34 @@
 import {combineReducers} from 'redux';
 import {
-    INCREMENT_BACKGROUND_COUNTER,
-    DECREMENT_BACKGROUND_COUNTER,
-    INCREMENT_UI_COUNTER,
-    DECREMENT_UI_COUNTER
+    ADD_TASK,
+    REMOVE_TASK
 } from '../constants';
 
-function createCounterReducer(increment, decrement) {
-    return function (state = 0, action) {
-        const value = action.value || 1;
-        switch (action.type) {
-            case increment:
-                return state + value;
-            case decrement:
-                return state - value;
-            default:
-                return state;
-        }
+
+const defaultTasks = [
+    {
+        id: 1,
+        title: "Learn JS"
+    },
+    {
+        id: 2,
+        title: "Make todo with JS"
     }
-}
+]
+
+const tasksReducer = (state = defaultTasks, action) => {
+  switch (action.type) {
+    case ADD_TASK:
+      return [...state, {id: state.length + 1, title: action.value}];
+    case REMOVE_TASK:
+      return [...state.filter(task => task.id !== action.taskId)];
+    default:
+      return state;
+  }
+};
+
+
 
 export default combineReducers({
-    backgroundCounter: createCounterReducer(INCREMENT_BACKGROUND_COUNTER, DECREMENT_BACKGROUND_COUNTER),
-    uiCounter: createCounterReducer(INCREMENT_UI_COUNTER, DECREMENT_UI_COUNTER)
+    tasks: tasksReducer
 });
