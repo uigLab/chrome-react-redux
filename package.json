@@ -1,9 +1,8 @@
 {
-  "name": "redux-webext-examples",
+  "name": "chrome-react-redux",
   "version": "1.0.0",
   "author": {
-    "name": "Alexander Ivantsov",
-    "email": "alexivantsov@ya.ru"
+    "name": "Raqib Abdullah"
   },
   "license": "MIT",
   "scripts": {
